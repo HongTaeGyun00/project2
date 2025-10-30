@@ -1,0 +1,25 @@
+{
+  "name": "project2",
+  "version": "1.0.0",
+  "description": "통합된 프론트엔드와 백엔드 프로젝트",
+  "main": "server/src/index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server/src/index.js",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "test": "concurrently \"cd client && npm test\" \"cd server && npm test\""
+  },
+  "dependencies": {
+    "socket.io": "^4.8.1",
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.0.1",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.45.0",
+    "prettier": "^3.0.0"
+  }
+}

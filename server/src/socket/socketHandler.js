@@ -138,20 +138,106 @@ module.exports = (io) => {
       }
     });
 
-    // 실시간 채팅
-    socket.on("chat_message", (data) => {
-      const { roomId, userId, userName, message } = data;
+    // 실시간 채팅 메시지 전송 (개선된 버전)
+    socket.on('send_message', async (data) => {
+      const { roomId, message, tempId } = data;
+      
+      // 소켓에 연결된 사용자 정보 가져오기
+      const user = connectedUsers.get(socket.id);
+      
+      if (!user) {
+        console.log('❌ User not authenticated');
+        socket.emit('message_error', { error: 'Not authenticated', tempId });
+        return;
+      }
 
-      console.log(`💬 Chat message in room ${roomId}: ${message}`);
-
-      // 방의 모든 사용자에게 메시지 전송
-      io.to(roomId).emit("new_message", {
-        id: Date.now(),
-        userId,
-        userName,
-        message,
-        timestamp: new Date(),
-      });
+      const { userId, userName } = user;
+      
+      console.log(`💬 Chat message in room ${roomId} from ${userName} (tempId: ${tempId})`);
+      
+      try {
+        // DB에 메시지 저장
+        const { data: savedMessage, error } = await supabase
+          .from('chat_messages')
+          .insert({
+            room_id: roomId,
+            user_id: userId,
+            message: message.trim(),
+            created_at: new Date().toISOString()
+          })
+          .select(`
+            *,
+            users (
+              id,
+              username,
+              display_name,
+              avatar_url
+            )
+          `)
+          .single();
+        
+        if (error) {
+          console.error('❌ Failed to save message to DB:', error);
+          
+          // DB 저장 실패 시에도 실시간 메시지는 전송
+          const tempMessage = {
+            id: tempId || `temp_${Date.now()}`,
+            tempId: tempId,
+            userId,
+            user_id: userId,
+            userName,
+            message,
+            timestamp: new Date().toISOString(),
+            saved: false
+          };
+          
+          // 방의 모든 사용자에게 전송 (보낸 사람 포함)
+          io.to(roomId).emit('new_message', tempMessage);
+          
+        } else {
+          console.log('✅ Message saved to DB:', savedMessage.id);
+          
+          // DB 저장 성공 시 저장된 메시지 전송
+          const formattedMessage = {
+            id: savedMessage.id,
+            tempId: tempId, // 클라이언트가 낙관적 메시지를 교체할 수 있도록
+            userId: savedMessage.user_id,
+            user_id: savedMessage.user_id,
+            userName: savedMessage.users?.display_name || savedMessage.users?.username || userName,
+            message: savedMessage.message,
+            created_at: savedMessage.created_at,
+            timestamp: savedMessage.created_at,
+            users: savedMessage.users,
+            saved: true
+          };
+          
+          // 방의 모든 사용자에게 전송 (보낸 사람 포함)
+          io.to(roomId).emit('new_message', formattedMessage);
+        }
+        
+      } catch (error) {
+        console.error('❌ Chat message error:', error);
+        
+        // 에러 시 임시 메시지 전송
+        const tempMessage = {
+          id: tempId || `temp_${Date.now()}`,
+          tempId: tempId,
+          userId,
+          user_id: userId,
+          userName,
+          message,
+          timestamp: new Date().toISOString(),
+          saved: false
+        };
+        
+        io.to(roomId).emit('new_message', tempMessage);
+        
+        // 에러 알림도 전송
+        socket.emit('message_error', { 
+          error: 'Failed to save message', 
+          tempId 
+        });
+      }
     });
 
     // 타이핑 상태
@@ -195,86 +281,6 @@ module.exports = (io) => {
 
         // 연결된 사용자 목록에서 제거
         connectedUsers.delete(socket.id);
-      }
-    });
-    // 실시간 채팅 (개선된 버전)
-    socket.on('chat_message', async (data) => {
-      const { roomId, userId, userName, message } = data;
-      
-      console.log(`💬 Chat message in room ${roomId} from ${userName}: ${message}`);
-      
-      try {
-        // DB에 메시지 저장
-        const { data: savedMessage, error } = await supabase
-          .from('chat_messages')
-          .insert({
-            room_id: roomId,
-            user_id: userId,
-            message: message.trim(),
-            created_at: new Date().toISOString()
-          })
-          .select(`
-            *,
-            users (
-              id,
-              username,
-              display_name,
-              avatar_url
-            )
-          `)
-          .single();
-        
-        if (error) {
-          console.error('❌ Failed to save message to DB:', error);
-          
-          // DB 저장 실패 시에도 실시간 메시지는 전송
-          const tempMessage = {
-            id: `temp_${Date.now()}`,
-            tempId: `temp_${Date.now()}`, // 임시 ID
-            userId,
-            userName,
-            message,
-            timestamp: new Date(),
-            saved: false
-          };
-          
-          // 방의 모든 사용자에게 전송
-          io.to(roomId).emit('new_message', tempMessage);
-          
-        } else {
-          console.log('✅ Message saved to DB:', savedMessage.id);
-          
-          // DB 저장 성공 시 저장된 메시지 전송
-          const formattedMessage = {
-            id: savedMessage.id,
-            userId: savedMessage.user_id,
-            userName: savedMessage.users?.display_name || savedMessage.users?.username || userName,
-            message: savedMessage.message,
-            created_at: savedMessage.created_at,
-            timestamp: savedMessage.created_at,
-            users: savedMessage.users,
-            saved: true
-          };
-          
-          // 방의 모든 사용자에게 전송 (보낸 사람 포함)
-          io.to(roomId).emit('new_message', formattedMessage);
-        }
-        
-      } catch (error) {
-        console.error('❌ Chat message error:', error);
-        
-        // 에러 시 임시 메시지 전송
-        const tempMessage = {
-          id: `temp_${Date.now()}`,
-          tempId: `temp_${Date.now()}`,
-          userId,
-          userName,
-          message,
-          timestamp: new Date(),
-          saved: false
-        };
-        
-        io.to(roomId).emit('new_message', tempMessage);
       }
     });
   });

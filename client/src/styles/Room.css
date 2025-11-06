@@ -1,0 +1,304 @@
+.room-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.room-header {
+  background: white;
+  padding: 20px 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.back-button {
+  padding: 10px 20px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.back-button:hover {
+  background: #d0d0d0;
+}
+
+.room-info {
+  flex: 1;
+}
+
+.room-info h1 {
+  margin: 0 0 10px 0;
+  font-size: 28px;
+}
+
+.room-meta {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.room-type {
+  background: #667eea;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.room-code {
+  background: #f0f0f0;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.room-code:hover {
+  background: #e0e0e0;
+}
+
+.room-nav {
+  background: white;
+  padding: 0 40px;
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.nav-tab {
+  background: none;
+  border: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav-tab:hover {
+  color: #667eea;
+}
+
+.nav-tab.active {
+  color: #667eea;
+  font-weight: bold;
+}
+
+.nav-tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #667eea;
+}
+
+.room-content {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Games Section */
+.games-section h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.game-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.game-card:hover:not(.coming-soon) {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.game-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+}
+
+.game-card p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.game-start-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.game-start-btn:hover {
+  opacity: 0.9;
+}
+
+.game-card.coming-soon {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* History Section */
+.history-section h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.answers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.answer-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.answer-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.answer-user {
+  font-weight: bold;
+  color: #667eea;
+}
+
+.answer-date {
+  color: #999;
+  font-size: 14px;
+}
+
+.answer-question {
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.answer-text {
+  color: #666;
+  line-height: 1.6;
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.no-answers {
+  text-align: center;
+  color: #999;
+  padding: 40px;
+  font-size: 18px;
+}
+
+/* Loading & Error States */
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.loading-spinner {
+  font-size: 24px;
+  color: #667eea;
+}
+
+.error-container h2 {
+  margin-bottom: 10px;
+}
+
+.error-container p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.error-container button {
+  padding: 10px 30px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.online-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 방 액션 버튼들 */
+.room-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.delete-room-btn,
+.leave-room-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.delete-room-btn {
+  background: #ff5252;
+  color: white;
+}
+
+.delete-room-btn:hover {
+  background: #ff1744;
+  transform: translateY(-2px);
+}
+
+.leave-room-btn {
+  background: #ff9800;
+  color: white;
+}
+
+.leave-room-btn:hover {
+  background: #f57c00;
+  transform: translateY(-2px);
+}

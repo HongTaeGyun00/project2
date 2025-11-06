@@ -1,0 +1,256 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.messages-container {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: #f8f9fa;
+}
+
+.message {
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  max-width: 70%;
+}
+
+.message.own-message {
+  margin-left: auto;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+.message-user {
+  font-weight: bold;
+}
+
+.message.own-message .message-user {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.message-time {
+  color: #999;
+}
+
+.message.own-message .message-time {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.message-text {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.typing-indicator {
+  padding: 10px 15px;
+  color: #666;
+  font-style: italic;
+  font-size: 14px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.chat-input-form {
+  display: flex;
+  padding: 15px;
+  background: white;
+  border-top: 1px solid #e0e0e0;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.chat-input:focus {
+  border-color: #667eea;
+}
+
+.send-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.send-button:hover {
+  opacity: 0.9;
+}
+
+/* 스크롤바 스타일 */
+.messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 로딩 상태 */
+.chat-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #999;
+  font-size: 16px;
+}
+
+/* 이전 메시지 로드 */
+.load-more {
+  text-align: center;
+  padding: 10px;
+}
+
+.load-more button {
+  background: #f0f0f0;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.load-more button:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.load-more button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 날짜 구분선 */
+.date-divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.date-divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.date-divider span {
+  background: #f8f9fa;
+  padding: 0 15px;
+  position: relative;
+  color: #999;
+  font-size: 13px;
+}
+
+/* 메시지 상태 표시 */
+.message-status {
+  margin-left: 5px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* 메시지 시간 표시 개선 */
+.message-time {
+  font-size: 11px;
+}
+
+/* 스크롤바 스타일 */
+.messages-container {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f8f9fa;
+}
+
+.messages-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* 전송 중 상태 */
+.chat-input:disabled {
+  background: #f5f5f5;
+}
+
+.send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 메시지 애니메이션 */
+.message {
+  animation: messageSlideIn 0.3s ease-out;
+}
+
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

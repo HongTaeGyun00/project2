@@ -1,0 +1,491 @@
+.balance-game-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.game-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.game-content {
+  padding: 40px;
+  overflow-y: auto;
+  max-height: calc(90vh - 80px);
+}
+
+/* 게임 소개 */
+.game-intro {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.game-intro p {
+  font-size: 18px;
+  color: #666;
+  margin: 10px 0;
+}
+
+.create-game-btn,
+.start-game-btn,
+.next-btn,
+.play-again-btn {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.create-game-btn:hover,
+.start-game-btn:hover,
+.next-btn:hover,
+.play-again-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.create-game-btn:disabled,
+.start-game-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 대기실 */
+.players-list {
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.players-list h3 {
+  margin: 0 0 20px 0;
+  color: #333;
+}
+
+.player-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.player-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.ready-badge {
+  background: #4caf50;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+}
+
+.waiting-message {
+  text-align: center;
+  color: #999;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+/* 질문 화면 */
+.question-container {
+  text-align: center;
+}
+
+.question-container h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.options-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.option-btn {
+  flex: 1;
+  padding: 30px 20px;
+  background: white;
+  border: 3px solid #e0e0e0;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: #667eea;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
+
+.option-btn.selected {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: transparent;
+  color: white;
+}
+
+.option-btn:disabled {
+  cursor: not-allowed;
+}
+
+.option-label {
+  font-size: 32px;
+  font-weight: bold;
+  color: inherit;
+}
+
+.option-btn.selected .option-label {
+  color: white;
+}
+
+.option-text {
+  font-size: 18px;
+  line-height: 1.4;
+  color: inherit;
+}
+
+.vs-divider {
+  font-size: 28px;
+  font-weight: bold;
+  color: #999;
+}
+
+.waiting-others {
+  color: #666;
+  font-size: 16px;
+  margin-top: 20px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* 결과 화면 */
+.results-container {
+  text-align: center;
+}
+
+.results-container h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.answer-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.answer-group {
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.answer-group h4 {
+  margin: 0 0 15px 0;
+  color: #666;
+}
+
+.player-badge {
+  display: inline-block;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin: 5px;
+  font-size: 14px;
+  color: #333;
+  border: 2px solid #e0e0e0;
+}
+
+/* 최종 결과 */
+.final-results {
+  text-align: center;
+}
+
+.final-results h3 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.final-results p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+/* 모달 배경 */
+.game-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* 방 액션 버튼들 */
+.room-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.delete-room-btn,
+.leave-room-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.delete-room-btn {
+  background: #ff5252;
+  color: white;
+}
+
+.delete-room-btn:hover {
+  background: #ff1744;
+  transform: translateY(-2px);
+}
+
+.leave-room-btn {
+  background: #ff9800;
+  color: white;
+}
+
+.leave-room-btn:hover {
+  background: #f57c00;
+  transform: translateY(-2px);
+}
+
+.waiting-players {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  margin-top: 15px;
+  animation: pulse 1.5s infinite;
+}
+
+/* 세션 삭제 버튼 */
+.delete-session-btn {
+  background: #ff5252;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.delete-session-btn:hover {
+  background: #ff1744;
+  transform: scale(1.1);
+}
+
+/* 세션 관리 버튼 */
+.owner-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.manage-game-btn {
+  flex: 1;
+  padding: 10px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.manage-game-btn:hover {
+  background: #45a049;
+}
+
+/* 나가기 버튼 */
+.leave-game-btn {
+  padding: 10px 20px;
+  background: #9e9e9e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+.leave-game-btn:hover {
+  background: #757575;
+}
+
+/* 삭제 확인 모달 */
+.confirm-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  z-index: 1002;
+  min-width: 400px;
+}
+
+.confirm-modal h3 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.confirm-modal p {
+  margin: 10px 0;
+  color: #666;
+}
+
+.warning-text {
+  color: #ff5252 !important;
+  font-size: 14px;
+  margin-top: 15px !important;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+  justify-content: flex-end;
+}
+
+.confirm-btn.delete {
+  background: #ff5252;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.confirm-btn.delete:hover {
+  background: #ff1744;
+}
+
+.confirm-btn.delete:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 세션 ID 정보 */
+.session-id-info {
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.session-id-label {
+  font-size: 12px;
+  color: #666;
+  font-family: monospace;
+}
+
+/* 세션 카드 액션 영역 */
+.session-actions {
+  margin-top: 10px;
+}
+
+/* 왕관 표시 */
+.player-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}

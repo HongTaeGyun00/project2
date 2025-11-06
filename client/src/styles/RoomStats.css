@@ -1,0 +1,276 @@
+.room-stats-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.stats-header h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #333;
+}
+
+.refresh-btn {
+  padding: 10px 20px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.refresh-btn:hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+/* 친밀도 레벨 카드 */
+.intimacy-level-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.level-badge {
+  padding: 20px 30px;
+  border-radius: 15px;
+  color: white;
+  text-align: center;
+}
+
+.level-text {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.level-score {
+  display: block;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.total-score {
+  text-align: center;
+}
+
+.score-label {
+  display: block;
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 5px;
+}
+
+.score-value {
+  display: block;
+  font-size: 36px;
+  font-weight: bold;
+  color: #667eea;
+}
+
+/* 카테고리별 점수 */
+.score-categories {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.score-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.score-item:last-child {
+  margin-bottom: 0;
+}
+
+.score-header {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  gap: 10px;
+}
+
+.score-icon {
+  font-size: 24px;
+}
+
+.score-name {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+.score-bar {
+  flex: 1;
+  height: 20px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 20px;
+}
+
+.score-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 1s ease-out;
+}
+
+.score-fill.empathy {
+  background: linear-gradient(90deg, #ff6b6b 0%, #ff1744 100%);
+}
+
+.score-fill.activity {
+  background: linear-gradient(90deg, #ffd93d 0%, #ffa000 100%);
+}
+
+.score-fill.communication {
+  background: linear-gradient(90deg, #6bcf7f 0%, #4caf50 100%);
+}
+
+.score-fill.consistency {
+  background: linear-gradient(90deg, #4e54c8 0%, #8f94fb 100%);
+}
+
+.score-percent {
+  width: 50px;
+  text-align: right;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 활동 통계 */
+.activity-stats {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.activity-stats h3 {
+  margin: 0 0 20px 0;
+  color: #333;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 32px;
+  font-weight: bold;
+  color: #667eea;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+}
+
+/* 멤버별 기여도 */
+.member-contributions {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.member-contributions h3 {
+  margin: 0 0 20px 0;
+  color: #333;
+}
+
+.member-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.member-stat {
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.member-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.member-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.member-answers {
+  color: #666;
+  font-size: 14px;
+}
+
+.contribution-bar {
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.contribution-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4px;
+  transition: width 0.5s ease-out;
+}
+
+/* 로딩 & 에러 */
+.stats-loading,
+.stats-error {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.stats-error button {
+  margin-top: 20px;
+  padding: 10px 24px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.stats-error button:hover {
+  background: #5a67d8;
+}

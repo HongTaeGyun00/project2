@@ -16,7 +16,7 @@ function MembersList({ members = [], onlineUsers = [] }) {
 
   return (
     <div className="members-container">
-      <h2>👥 방 멤버 ({members.length}명)</h2>
+      <h2>방 멤버 ({members.length}명)</h2>
       <div className="members-grid">
         {members.map((member) => (
           <div key={member.user_id} className="member-card">

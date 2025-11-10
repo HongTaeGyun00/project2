@@ -84,7 +84,7 @@ const fetchStats = async () => {
       <div className="stats-header">
         <h2>📊 우리의 친밀도</h2>
         <button className="refresh-btn" onClick={fetchStats}>
-          🔄 새로고침
+           새로고침
         </button>
       </div>
 

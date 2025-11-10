@@ -234,7 +234,7 @@ function QuestionCard({ roomId }) {
           </div>
         ) : (
           <div className="answered-section">
-            <p className="answered-message">✅ 이미 답변하셨습니다!</p>
+            <p className="answered-message">이미 답변하셨습니다!</p>
             <button 
               className="new-question-btn"
               onClick={handleNewQuestion}
@@ -260,7 +260,7 @@ function QuestionCard({ roomId }) {
             onClick={() => fetchRandomQuestion(questionLevel)}
             title="랜덤 질문 보기"
           >
-            🎲 랜덤 질문
+            랜덤 질문
           </button>
         )}
         
@@ -270,7 +270,7 @@ function QuestionCard({ roomId }) {
             onClick={fetchDailyQuestion}
             title="오늘의 질문으로 돌아가기"
           >
-            📅 오늘의 질문
+            오늘의 질문
           </button>
         )}
       </div>

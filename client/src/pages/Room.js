@@ -149,7 +149,7 @@ function Room() {
 
       <header className="room-header">
         <button className="back-button" onClick={handleBack}>
-          ← 뒤로
+          뒤로
         </button>
         <div className="room-info">
           <h1>{room.room_name}</h1>
@@ -170,7 +170,7 @@ function Room() {
               onClick={handleDeleteRoom}
               title="방 삭제"
             >
-              🗑️ 방 삭제
+              방 삭제
             </button>
           ) : (
             <button
@@ -230,7 +230,7 @@ function Room() {
 
         {activeTab === "games" && (
           <div className="games-section">
-            <h2>🎮 미니게임</h2>
+            <h2>미니게임</h2>
             <div className="games-grid">
               <div className="game-card">
                 <h3>밸런스 게임</h3>
@@ -261,7 +261,7 @@ function Room() {
 
         {activeTab === "history" && (
           <div className="history-section">
-            <h2>📚 우리의 기록</h2>
+            <h2>우리의 기록</h2>
             <AnswersHistory roomId={roomId} />
           </div>
         )}
